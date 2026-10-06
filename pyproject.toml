@@ -1,0 +1,46 @@
+[project]
+name = "discogs-mcp"
+version = "0.1.0"
+description = "MCP server giving Claude full access to Discogs: database, collection, wantlist, marketplace and a local SQLite cache for analysis."
+readme = "README.md"
+license = "MIT"
+keywords = ["mcp", "discogs", "claude", "vinyl", "music"]
+authors = [
+    { name = "Hunter", email = "c.hunter.lightsey@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=2.3.0",
+    "pydantic>=2.13.5",
+    "pydantic-settings>=2.15.0",
+]
+
+[project.optional-dependencies]
+local = [
+    "mutagen>=1.48.1",
+    "rapidfuzz>=3.14.6",
+]
+
+[project.scripts]
+discogs-mcp = "discogs_mcp.server:main"
+
+[build-system]
+requires = ["uv_build>=0.11.25,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "respx>=0.23.1",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = ["live: hits the real Discogs API (needs DISCOGS_TOKEN)"]
+addopts = "-m 'not live'"
+
+[tool.ruff]
+line-length = 110

@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local
+.DS_Store
+.env
+*.db
+*.db-shm
+*.db-wal
+.pytest_cache/
+.ruff_cache/
+.claude/
